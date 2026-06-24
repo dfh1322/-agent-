@@ -30,7 +30,7 @@ cp frontend/.env.example frontend/.env
 
 ### 2. 填写本地配置
 
-- 所有真实密钥、密码、令牌、数据库连接串只允许写入 `backend/.env` 或 `frontend/.env`，不要写回 `.env.example`。
+- 所有真实密钥、密码、令牌、数据库连接串只允许写入 `backend/.env`，不要写回 `.env.example`。
 - 前端 `VITE_*` 变量会被打包到浏览器端，只能填写公开配置，不能填写任何私钥或服务端凭证。
 - 若准备提交到 GitHub，提交前只保留模板文件，确认本地运行文件仍为未跟踪或被忽略状态。
 
@@ -44,9 +44,10 @@ pip install -r requirements.txt
 # 前端
 cd ../frontend
 npm install
+npm run dev
 ```
 
-分别完成 `backend/.env` 与 `frontend/.env` 配置后，再按各子项目的 README 或启动脚本运行服务。
+完成 `backend/.env` 配置后，再按各子项目的 README 或启动脚本运行服务。
 
 ## 后端变量说明
 
@@ -88,11 +89,3 @@ npm install
 - 若 `REDIS_URL` 未配置或 Redis 不可用，聊天缓存与短信限流会退回内存实现，适合本地开发，不适合生产高可用场景。
 - 若未配置容联云凭证，短信发送会进入 mock 模式，只打印验证码，不发送真实短信。
 
-## 前端变量说明
-
-运行时文件：`frontend/.env`
-
-| 变量名 | 是否必填 | 作用 | 获取方式 / 填写要求 |
-|------|------|------|------|
-| `VITE_API_BASE` | 是 | 浏览器侧 API 基础地址 | 生产通过反向代理时可填 `/api`；若前后端分离直连，可填完整地址如 `http://localhost:8000/api` |
-| `VITE_DEV_BACKEND` | 本地开发建议填写 | Vite 开发代理目标 | 本地通常填 `http://localhost:8000`，供 `vite.config.ts` 的 `/api` 代理使用 |
